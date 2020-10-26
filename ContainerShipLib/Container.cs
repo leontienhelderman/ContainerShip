@@ -4,13 +4,23 @@ namespace ContainerShipLib
 {
     public class Container
     {
+        public const int MinWeight = 4000;
+        public const int MaxWeight = 30000;
         public type ContainerType { get; private set; }
-        public weight ContainerWeight { get; private set; }
+        public int ContainerWeight { get; private set; }
 
-        public Container(type type, weight weight)
+        public Container(type type, int weight)
         {
             ContainerType = type;
-            ContainerWeight = weight;
+            if(weight >= MinWeight && weight <= MaxWeight)
+            {
+                ContainerWeight = weight;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Weight is invalid");
+            }
+            
         }
 
         public enum type
@@ -21,10 +31,5 @@ namespace ContainerShipLib
             valuecool
         }
 
-        public enum weight
-        {
-            empty = 4,
-            full = 3000
-        }
     }
 }

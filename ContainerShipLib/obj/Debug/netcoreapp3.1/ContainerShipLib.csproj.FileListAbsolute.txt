@@ -1,0 +1,9 @@
+D:\repos\ContainerShip\ContainerShipLib\bin\Debug\netcoreapp3.1\ContainerShipLib.deps.json
+D:\repos\ContainerShip\ContainerShipLib\bin\Debug\netcoreapp3.1\ContainerShipLib.dll
+D:\repos\ContainerShip\ContainerShipLib\bin\Debug\netcoreapp3.1\ContainerShipLib.pdb
+D:\repos\ContainerShip\ContainerShipLib\obj\Debug\netcoreapp3.1\ContainerShipLib.csprojAssemblyReference.cache
+D:\repos\ContainerShip\ContainerShipLib\obj\Debug\netcoreapp3.1\ContainerShipLib.csproj.CoreCompileInputs.cache
+D:\repos\ContainerShip\ContainerShipLib\obj\Debug\netcoreapp3.1\ContainerShipLib.AssemblyInfoInputs.cache
+D:\repos\ContainerShip\ContainerShipLib\obj\Debug\netcoreapp3.1\ContainerShipLib.AssemblyInfo.cs
+D:\repos\ContainerShip\ContainerShipLib\obj\Debug\netcoreapp3.1\ContainerShipLib.dll
+D:\repos\ContainerShip\ContainerShipLib\obj\Debug\netcoreapp3.1\ContainerShipLib.pdb
