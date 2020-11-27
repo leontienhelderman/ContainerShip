@@ -4,41 +4,24 @@ using System.Text;
 
 namespace ContainerShipLib
 {
-    class Ship
+    public class Ship
     {
-        private List<Container> _containers;
-
-        public Ship()
+        public int Length { get; }
+        public int Weight { get; }
+        public int Width { get; }
+        private List<Row> ship;
+        public Ship(int length, int weight, int width)
         {
-
-            _containers = new List<Container>()
-            {
-                new Container(Container.type.coolable, 5000),
-                new Container(Container.type.valuable, 4500),
-                new Container(Container.type.coolable, 29999),
-                new Container(Container.type.normal, 15300),
-                new Container(Container.type.normal, 25550),
-                new Container(Container.type.valuecool, 30000),
-                new Container(Container.type.valuecool, 4000),
-                new Container(Container.type.coolable, 12500),
-                new Container(Container.type.valuable, 6500),
-                new Container(Container.type.valuable, 4000),
-            };
+            Length = length;
+            Weight = weight;
+            Width = width;
+            ship = new List<Row>();
         }
 
-        public int CapacityStack
+        public List<Row> FullShip(Row row)
         {
-            get {
-                int sum = 0;
-
-                foreach (Container container in _containers)
-                {
-                    sum += (int)container.ContainerWeight;
-                }
-
-                return 120 - sum;
-            }
-
+            ship.Add(row);
+            return ship;
         }
     }
 }

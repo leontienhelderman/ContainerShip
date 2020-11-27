@@ -9,12 +9,12 @@ namespace ContainerShipLib
     public class Stack
     {
         private List<Container> stack;
-
+        Ship ship;
         private int WeightCapacity = 120000;
         public Stack()
         {
             stack = new List<Container>();
-
+            ship = new Ship(10, 120000, 5);
         }
 
         public bool AddContainerToStack(Container _container)
@@ -23,13 +23,23 @@ namespace ContainerShipLib
             {
                 return false;
             }
-
-            stack.Add(_container);
-            stack = OrderStackByWeight(stack);
             
+            for(int i = 0; i <= ship.Width; i++)
+            {
+                Stack s = new Stack();
+                if(_container.ContainerType == Container.type.coolable)
+                {
+                    stack.Add(_container);
+                }
+            }
+
+            stack = OrderStackByWeight(stack);
+            if(_container.ContainerType == Container.type.coolable)
+            {
+                stack.Add(_container);
+            }
 
             return true;
-
         }
 
         private bool StackWeightFit(Container container)
@@ -56,40 +66,7 @@ namespace ContainerShipLib
             return false;
         }
 
-        private void OrderByContainerType(List<Container> containers)
-        {
-            List<Container> coolablecontainers = new List<Container>();
-            List<Container> valuablecontainers = new List<Container>();
-            List<Container> valuecoolcontainers = new List<Container>();
-            List<Container> normalcontainers = new List<Container>();
-
-            foreach (Container container in containers)
-            {
-                if (container.ContainerType == Container.type.coolable)
-                {
-                    coolablecontainers.Add(container);
-                }
-                else if (container.ContainerType == Container.type.valuable)
-                {
-                    valuablecontainers.Add(container);
-                }
-                else if (container.ContainerType == Container.type.valuecool)
-                {
-                    valuecoolcontainers.Add(container);
-                }
-                else if (container.ContainerType == Container.type.normal)
-                {
-                    normalcontainers.Add(container);
-                }
-            }
-
-            coolablecontainers = OrderStackByWeight(coolablecontainers);
-            valuablecontainers = OrderStackByWeight(valuablecontainers);
-            valuecoolcontainers = OrderStackByWeight(valuecoolcontainers);
-            normalcontainers = OrderStackByWeight(normalcontainers);
-        }
-
-        public List<Container> OrderStackByWeight(List<Container> containers)
+        private List<Container> OrderStackByWeight(List<Container> containers)
         {
             return containers.OrderBy(c => c.ContainerWeight).ToList();
         }

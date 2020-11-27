@@ -25,10 +25,9 @@ namespace ContainerShipLib
 
         public enum type
         {
-            normal,
-            valuable,
             coolable,
-            valuecool
+            normal,
+            valuable
         }
 
     }
