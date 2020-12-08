@@ -7,21 +7,27 @@ namespace ContainerShipLib
     public class Ship
     {
         public int Length { get; }
-        public int Weight { get; }
         public int Width { get; }
-        private List<Row> ship;
-        public Ship(int length, int weight, int width)
+        public int Weight { get; }
+        private List<Row> rows;
+        public IReadOnlyCollection<Row> Rows { get { return rows.AsReadOnly(); } }
+
+        public Ship(int length, int width, int weight)
         {
             Length = length;
             Weight = weight;
             Width = width;
-            ship = new List<Row>();
+            rows = new List<Row>();
+            CreateRows();
         }
 
-        public List<Row> FullShip(Row row)
+        private void CreateRows()
         {
-            ship.Add(row);
-            return ship;
+            for(int i =0; i< Length; i++)
+            {
+                Row row = new Row(Width);
+                rows.Add(row);
+            }
         }
     }
 }

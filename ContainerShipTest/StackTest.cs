@@ -32,13 +32,13 @@ namespace ContainerShipTest
         }
 
         [Test]
-        public void AddContainerToStack_ExceedStackWeightCapacity_returnsFalse()
+        public void AddContainerToStack_ExceedStackWeightCapacity_ReturnsFalse()
         {
             Assert.IsFalse(stack.AddContainerToStack(new Container(Container.type.normal, 4001)));
         }
 
         [Test]
-        public void AddContainerToStack_FitsPerfectly_returnsTrue()
+        public void AddContainerToStack_FitsPerfectly_ReturnsTrue()
         {
             Assert.IsTrue(stack.AddContainerToStack(new Container(Container.type.normal, 4000)));
         }

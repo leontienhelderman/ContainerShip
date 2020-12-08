@@ -1,33 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace ContainerShipLib
 {
     public class Row
     {
-        Ship ship = new Ship(10, 120000, 5);
-        private List<Stack> row;
-        public Row()
+        public int Width { get; }
+        private List<Stack> stacks;
+        public IReadOnlyCollection<Stack> Stacks { get { return stacks.AsReadOnly();} }
+
+        public Row(int width)
         {
-            row = new List<Stack>();
+            Width = width;
+            stacks = new List<Stack>();
+            CreateStacks();
         }
 
-        public List<Stack> FullRow(Stack stack)
+        private void CreateStacks()
         {
-            for(int i =0; i <= ship.Width; i++)
+            for(int i =0; i < Width; i++)
             {
                 Stack stack = new Stack();
-                row.Add(stack);
+                stacks.Add(stack);
             }
-
-            //foreach(Stack stack in row)
-            //{
-            //    stack.AddContainerToStack(Container container);
-            //}
-            return row;
         }
-
-        
     }
 }
