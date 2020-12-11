@@ -20,7 +20,6 @@ namespace ContainerShipLib
             {
                 throw new ArgumentOutOfRangeException("Weight is invalid");
             }
-            
         }
 
         public enum type
@@ -29,6 +28,5 @@ namespace ContainerShipLib
             normal,
             valuable
         }
-
     }
 }
