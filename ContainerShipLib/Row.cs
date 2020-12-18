@@ -25,32 +25,55 @@ namespace ContainerShipLib
             }
         }
 
-        public void DistributeContainers(List<Container> containers)
+        public List<Stack> DistributeContainers(List<Container> containers)
+        {
+            return AddCoolablesToStackWithLowestWeight(containers);
+
+            
+
+        }
+
+        private IEnumerable<Container> GetCoolables(List<Container> containers)
         {
             var coolablecontainers = containers.Where(c => c.ContainerType == Container.type.coolable);
+            return coolablecontainers;
+        }
 
-            foreach (Container container in coolablecontainers)
+        private Stack GetStackWithLowestWeight()
+        {
+            Stack selectedStack = null;
+            int lowestWeight = int.MaxValue;
+
+            foreach (Stack stack in Stacks)
             {
-                Stack selectedStack = null;
-                int lowestWeight = int.MaxValue;
-
-                foreach (Stack stack in Stacks)
+                if (stack.GetWeight() < lowestWeight)
                 {
-                    if (stack.GetWeight() < lowestWeight)
-                    {
-                        selectedStack = stack;
-                        lowestWeight = stack.GetWeight();
-                    }
-
-                }
-
-                if (selectedStack != null)
-                {
-                    selectedStack.AddContainerToStack(container);
+                    selectedStack = stack;
+                    lowestWeight = stack.GetWeight();
                 }
 
             }
 
+            if (selectedStack != null)
+            {
+                return selectedStack;
+            }
+
+            return null;
+        }
+
+        private void AddCoolablesToStackWithLowestWeight(List<Container> containers)
+        {
+            
+            foreach (Container container in GetCoolables(containers))
+            {
+
+                if (GetStackWithLowestWeight() != null)
+                {
+                    GetStackWithLowestWeight().AddContainerToStack(container);
+                }
+
+            }
         }
 
     }
