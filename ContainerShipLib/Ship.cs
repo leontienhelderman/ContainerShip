@@ -29,5 +29,12 @@ namespace ContainerShipLib
                 rows.Add(row);
             }
         }
+
+        public void DistributeContainers(List<Container> containers)
+        {
+            
+        }
+
+        public void 
     }
 }

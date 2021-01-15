@@ -28,5 +28,12 @@ namespace ContainerShipLib
             normal,
             valuable
         }
+
+        public override string ToString()
+        {
+            return ContainerType.ToString() + " " + ContainerWeight.ToString();
+        }
+
+        
     }
 }

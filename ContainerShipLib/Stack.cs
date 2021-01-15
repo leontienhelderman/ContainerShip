@@ -10,6 +10,7 @@ namespace ContainerShipLib
     {
         private List<Container> stack;
         private int WeightCapacity = 120000;
+        public IReadOnlyCollection<Container> Containers { get { return stack.AsReadOnly(); } }
 
         public Stack()
         {
@@ -22,9 +23,10 @@ namespace ContainerShipLib
             {
                 return false;
             }
-            
 
-            stack = OrderStackByWeight(stack);
+            stack.Add(_container);
+            //stack = OrderStackByWeight(stack);
+            
 
             return true;
         }
@@ -61,6 +63,16 @@ namespace ContainerShipLib
         public int GetWeight()
         {
             return stack.Sum(c => c.ContainerWeight);
+        }
+
+        public override string ToString()
+        {
+            string result = "";
+            foreach(Container container in stack)
+            {
+                result += container.ToString();
+            }
+            return result;
         }
     }
 }

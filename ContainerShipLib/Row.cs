@@ -27,16 +27,32 @@ namespace ContainerShipLib
 
         public List<Stack> DistributeContainers(List<Container> containers)
         {
-            return AddCoolablesToStackWithLowestWeight(containers);
+            var stacks = new List<Stack>();
+            var coolables = AddCoolablesToStackWithLowestWeight(containers);
+            var normals = AddNormalsToStackWithLowestWeight(containers);
+            stacks.AddRange(coolables);
+            stacks.AddRange(normals);
 
-            
+            return stacks;
 
         }
 
         private IEnumerable<Container> GetCoolables(List<Container> containers)
         {
-            var coolablecontainers = containers.Where(c => c.ContainerType == Container.type.coolable);
-            return coolablecontainers;
+            var coolableContainers = containers.Where(c => c.ContainerType == Container.type.coolable);
+            return coolableContainers.OrderByDescending(c => c.ContainerWeight).ToList();
+        }
+
+        private IEnumerable<Container> GetNormals(List<Container> containers)
+        {
+            var normalContainers = containers.Where(c => c.ContainerType == Container.type.normal);
+            return normalContainers.OrderByDescending(c => c.ContainerWeight).ToList();
+        }
+
+        private IEnumerable<Container> GetValuables(List<Container> containers)
+        {
+            var valuableContainers = containers.Where(c => c.ContainerType == Container.type.valuable);
+            return valuableContainers.OrderByDescending(c => c.ContainerWeight).ToList();
         }
 
         private Stack GetStackWithLowestWeight()
@@ -62,18 +78,37 @@ namespace ContainerShipLib
             return null;
         }
 
-        private void AddCoolablesToStackWithLowestWeight(List<Container> containers)
+        public List<Stack> AddCoolablesToStackWithLowestWeight(List<Container> containers)
         {
+            HashSet<Stack> stacks = new HashSet<Stack>();
             
             foreach (Container container in GetCoolables(containers))
             {
-
-                if (GetStackWithLowestWeight() != null)
+                var stack = GetStackWithLowestWeight();
+                if (stack != null)
                 {
-                    GetStackWithLowestWeight().AddContainerToStack(container);
+                    stack.AddContainerToStack(container);
+                    stacks.Add(stack);
                 }
 
             }
+            return stacks.ToList();
+        }
+
+        public List<Stack> AddNormalsToStackWithLowestWeight(List<Container> containers)
+        {
+            HashSet<Stack> stacks = new HashSet<Stack>();
+
+            foreach(Container container in GetNormals(containers))
+            {
+                var stack = GetStackWithLowestWeight();
+                if(stack != null)
+                {
+                    stack.AddContainerToStack(container);
+                    stacks.Add(stack);
+                }
+            }
+            return stacks.ToList();
         }
 
     }
